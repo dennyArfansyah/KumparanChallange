@@ -13,6 +13,8 @@ class GridCell: UICollectionViewCell {
     let genreLabel = UILabel()
     let imageView = UIImageView()
     
+    static let reusedIdentifier = String(describing: GridCell.self)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -24,19 +26,16 @@ class GridCell: UICollectionViewCell {
     }
     
     func setupLayout() {
-        backgroundColor = .lightGray
+        backgroundColor = .white
         
         contentView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
-        imageView.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        imageView.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 5, widthConstant: 0, heightConstant: 0)
         
         contentView.addSubview(genreLabel)
-        genreLabel.numberOfLines = 0
         genreLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         genreLabel.textAlignment = .center
-        
-        genreLabel.anchor(nil, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
-        genreLabel.anchorCenterSuperview()
+        genreLabel.anchor(nil, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 5, rightConstant: 10, widthConstant: 0, heightConstant: 0)
     }
     
     func setupData(with photo: Photo) {

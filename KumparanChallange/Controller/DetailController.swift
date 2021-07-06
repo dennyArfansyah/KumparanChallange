@@ -41,4 +41,9 @@ class DetailController: UITableViewController {
         }
     }
     
+    func setupUserController(with user: User) {
+        let controller = UserController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
 }

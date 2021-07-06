@@ -10,7 +10,7 @@ import LBTAComponents
 extension DetailController {
     
     func setupLayout() {
-        tableView.register(HeaderDetailView.self, forHeaderFooterViewReuseIdentifier: HeaderDetailView.identifier)
+        tableView.register(HeaderTableView.self, forHeaderFooterViewReuseIdentifier: HeaderTableView.identifier)
         tableView.register(CommentViewCell.self, forCellReuseIdentifier: CommentViewCell.reusedIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -18,6 +18,7 @@ extension DetailController {
         tableView.estimatedSectionHeaderHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 75
+        tableView.tableFooterView = UIView()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,13 +36,15 @@ extension DetailController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        let headerDetailView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderDetailView.identifier) as! HeaderDetailView
-        headerDetailView.setupHeaderData(with: viewModel.post, and: viewModel.author)
-        headerDetailView.gotoDetailController = {
-            let controller = UserController(user: self.user)
-            self.navigationController?.pushViewController(controller, animated: true)
+        let headerTableView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderTableView.identifier) as! HeaderTableView
+        headerTableView.titleLabel.text = post.title
+        headerTableView.usernameLabel.text = viewModel.author
+        headerTableView.bodyLabel.text = post.body
+        headerTableView.comments.text = "Comments"
+        headerTableView.gotoDetailController = {
+            self.setupUserController(with: self.user)
         }
-        return headerDetailView
+        return headerTableView
     }
     
 }

@@ -10,20 +10,21 @@ import LBTAComponents
 extension AlbumController {
     
     func setupLayout() {
-        collectionView.register(GridCell.self, forCellWithReuseIdentifier: "GridCell")
+        collectionView.register(GridCell.self, forCellWithReuseIdentifier: GridCell.reusedIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photos?.count ?? 0
+        viewModel.photos?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let photo = (viewModel.photos?[indexPath.row])!
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as! GridCell
-        cell.setupData(with: photo)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridCell.reusedIdentifier, for: indexPath) as! GridCell
+        if let photo = viewModel.photos?[indexPath.row] {
+            cell.setupData(with: photo)
+        }
         return cell
     }
     
@@ -33,9 +34,9 @@ extension AlbumController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movie = viewModel.photos?[indexPath.row]
-//        let controller = DetailMoviewController(movie: movie)
-//        navigationController?.pushViewController(controller, animated: true)
+        if let photo = viewModel.photos?[indexPath.row] {
+            didSelectPhoto(with: photo)
+        }
     }
     
 }

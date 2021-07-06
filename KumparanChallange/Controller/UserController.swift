@@ -25,6 +25,7 @@ class UserController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.setupHeaderData(with: user)
         setupLayout()
         viewModel.getAlbumsRequest(with: user.id) { response in
             
@@ -37,6 +38,11 @@ class UserController: UITableViewController {
             }
             
         }
+    }
+    
+    func setupAlbumController(with album: Album) {
+        let controller = AlbumController(album: album)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

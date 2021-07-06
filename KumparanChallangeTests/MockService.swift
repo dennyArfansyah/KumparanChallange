@@ -14,7 +14,7 @@ class MockService: ServiceProtocol {
         
         // change _dummy_data.json for response data inside Resource folder
         // just using wrong file dummy data to make it failed
-        if let path = Bundle.main.path(forResource: "/comment_dummy_data", ofType: ".json") {
+        if let path = Bundle.main.path(forResource: "/photo_dummy_data", ofType: ".json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
                 completion(.success(data))

@@ -32,10 +32,15 @@ class AlbumController: UICollectionViewController, UICollectionViewDelegateFlowL
                 self.collectionView.reloadData()
             case .failure(let err):
                 let er = err as NSError
-                self.view.makeToast(er.domain)
+                self.collectionView.makeToast(er.domain)
             }
             
         }
+    }
+    
+    func didSelectPhoto(with photo: Photo) {
+        let controller = PhotoController(photo: photo)
+        present(controller, animated: true, completion: nil)
     }
 }
 

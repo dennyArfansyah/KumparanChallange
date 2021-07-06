@@ -1,6 +1,6 @@
 //
-//  KumparanChallangeTests.swift
-//  KumparanChallangeTests
+//  PostControllerTest.swift
+//  PostControllerTest
 //
 //  Created by Denny Arfansyah on 05/07/21.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import KumparanChallange
 
-class KumparanChallangeTests: XCTestCase {
+class PostControllerTest: XCTestCase {
     
     var viewModel: PostViewModel!
     var mockService: MockService!

@@ -11,9 +11,20 @@ class UserViewModel {
     
     private let service: ServiceProtocol
     var albums: [Album]?
+    var usernameNAddress = ""
+    var email = ""
+    var address = ""
+    var user: User!
     
     init(service: ServiceProtocol = Service()) {
         self.service = service
+    }
+    
+    func setupHeaderData(with user: User) {
+        self.user = user
+        usernameNAddress = "\(user.name), \(user.company.name)"
+        email = user.email
+        address = "\(user.address.suite), \(user.address.street), \(user.address.city) \(user.address.zipcode)"
     }
     
     func getAlbumsRequest(with userId: Int, completion: @escaping (Result<[Album], Error>) -> Void) {
